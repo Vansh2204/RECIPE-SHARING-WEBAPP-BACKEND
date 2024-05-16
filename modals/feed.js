@@ -1,6 +1,16 @@
 const mongoose = require('mongoose');
 
 const feedSchema = mongoose.Schema({
+    UserImage:{
+        type:String,
+        required:true
+
+    },
+    UserName:{
+        type:String,
+        required:true
+
+    },
     RecipeName: {
         type: String,
         required: true
