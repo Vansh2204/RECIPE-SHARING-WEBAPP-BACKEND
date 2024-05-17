@@ -16,6 +16,10 @@ const feedSchema = mongoose.Schema({
         required: true
     },
     RecipeIngredients: {
+        type: Array,
+        required: true
+    },
+    RecipeProcess: {
         type: String,
         required: true
     },
