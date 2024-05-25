@@ -6,15 +6,15 @@ const app = express();
 app.use(cors());
 
 app.use(express.json());
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 
-app.get('/recipes',async (req,res)=>{
+app.get('/recipes', async (req, res) => {
     const feeds = await recipes.find({});
     res.json(feeds);
 })
 
-app.get('/recipes/:id',async (req,res)=>{
-    const {id} = req.params;
+app.get('/recipes/:id', async (req, res) => {
+    const { id } = req.params;
     const feed = await recipes.findById(id);
     res.json(feed);
 })
@@ -64,9 +64,9 @@ app.delete('/recipes/:id', async (req, res) => {
     }
 })
 
-mongoose.connect('mongodb+srv://vanshhathirsa:tQr9YskODI3NOL4o@cluster0.othizq2.mongodb.net/RECIPE-API?retryWrites=true&w=majority&appName=Cluster0').then(()=>{
+mongoose.connect('mongodb+srv://vanshhathirsa:tQr9YskODI3NOL4o@cluster0.othizq2.mongodb.net/RECIPE-API?retryWrites=true&w=majority&appName=Cluster0').then(() => {
     console.log('Connected to Database')
-    app.listen(3300,()=>{
+    app.listen(3300, () => {
         console.log('API running on PORT 3300 !!!')
     })
 })
