@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const recipes = require('./modals/feed');
+const userposts = require('./modals/userpost');
 const app = express();
 app.use(cors());
 
@@ -31,7 +32,7 @@ app.post('/recipes', async (req, res) => {
     }
 })
 
-//Update data
+
 
 app.put('/recipes/:id', async (req, res) => {
     try {
@@ -48,7 +49,6 @@ app.put('/recipes/:id', async (req, res) => {
     }
 })
 
-//Delete data
 
 app.delete('/recipes/:id', async (req, res) => {
     try {
@@ -63,6 +63,24 @@ app.delete('/recipes/:id', async (req, res) => {
         res.status(500).json({ message: error.message })
     }
 })
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
+app.get('/posts',async(req,res)=>{
+    const posts = await userposts.find({});
+    res.json(posts);
+})
+app.get('/posts/:id', async (req, res) => {
+    const { id } = req.params;
+    const post = await userposts.findById(id);
+    res.json(post);
+})
+
+app.post('/posts',async (req,res)=>{
+    const post = await userposts.create(req.body)
+    res.json(post);
+})
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
 
 mongoose.connect('mongodb+srv://vanshhathirsa:tQr9YskODI3NOL4o@cluster0.othizq2.mongodb.net/RECIPE-API?retryWrites=true&w=majority&appName=Cluster0').then(() => {
     console.log('Connected to Database')
