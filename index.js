@@ -80,6 +80,12 @@ app.post('/posts',async (req,res)=>{
     res.json(post);
 })
 
+app.delete('/posts/:id', async (req, res) => {
+        const { id } = req.params
+        const post = await userposts.findByIdAndDelete(id);
+        res.json(post);
+})
+
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
 mongoose.connect('mongodb+srv://vanshhathirsa:tQr9YskODI3NOL4o@cluster0.othizq2.mongodb.net/RECIPE-API?retryWrites=true&w=majority&appName=Cluster0').then(() => {

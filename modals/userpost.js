@@ -11,7 +11,17 @@ const userpostschema = mongoose.Schema(
      },
      RecipeProcess:{
         type:String
-     }
+     },
+     userinfo: {
+      username: {
+          type: String,
+          required: true
+      },
+      picture: {
+          type: String,
+          required: true
+      }
+  }
     },{timestamps:true}
 )
 
