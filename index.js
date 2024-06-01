@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const recipes = require('./modals/feed');
 const userposts = require('./modals/userpost');
+const usercomment = require('./modals/comments')
 const app = express();
 app.use(cors());
 
@@ -71,7 +72,7 @@ app.get('/posts',async(req,res)=>{
 })
 app.get('/posts/:id', async (req, res) => {
     const { id } = req.params;
-    const post = await userposts.findById(id);
+    const post = await userposts.findById(id); 
     res.json(post);
 })
 
@@ -84,6 +85,21 @@ app.delete('/posts/:id', async (req, res) => {
         const { id } = req.params
         const post = await userposts.findByIdAndDelete(id);
         res.json(post);
+})
+//-----------------------------------------------------------------------------------------------------------------------------------------
+app.get('/comments',async(req,res)=>{
+    const comments = await usercomment.find({});
+    res.json(comments);
+})
+app.post('/comments',async (req,res)=>{
+    const comment = await usercomment.create(req.body)
+    res.json(comment);
+})
+
+app.delete('/comment/:id', async (req, res) => {
+        const { id } = req.params
+        const comment = await usercomment.findByIdAndDelete(id);
+        res.json(comment);
 })
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
